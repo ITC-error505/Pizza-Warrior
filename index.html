@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="TemplateData/style.css">
   </head>
   <body>
-    <div style="height:20px; width: 960px; background: blue;" onclick="unityInstance.SetFullscreen(1)"><b>Click here to make it full screen.</b></div>
-    
     <div id="unity-container" class="unity-desktop">
       <canvas id="unity-canvas" width=960 height=600 tabindex="-1"></canvas>
       <div id="unity-loading-bar">
@@ -27,7 +25,6 @@
     </div>
     <script>
       var canvas = document.querySelector("#unity-canvas");
-      var unityInstance = null; // Define unityInstance globally
 
       // Shows a temporary message banner/ribbon for a few seconds, or
       // a permanent error message on top of the canvas if type=='error'.
@@ -112,8 +109,7 @@
       script.onload = () => {
         createUnityInstance(canvas, config, (progress) => {
           document.querySelector("#unity-progress-bar-full").style.width = 100 * progress + "%";
-              }).then((instance) => {
-                unityInstance = instance; // Store the instance globally
+              }).then((unityInstance) => {
                 document.querySelector("#unity-loading-bar").style.display = "none";
                 document.querySelector("#unity-fullscreen-button").onclick = () => {
                   unityInstance.SetFullscreen(1);
